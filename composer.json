@@ -1,0 +1,26 @@
+{
+    "name": "crphp/core",
+    "type": "library",
+    "description": "Esqueleto básico para montar classes especializadas em gerenciamento de máquinas remotas",
+    "keywords": ["SO", "acesso remoto"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/crphp/core/issues",
+        "source": "https://github.com/crphp/core"
+    },
+    "authors": [
+        {
+            "name": "Fábio Jânio",
+            "email": "contato@fabiojanio.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crphp\\Core\\": "src/"
+            }
+    },
+    "minimum-stability": "dev"
+}
