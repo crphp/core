@@ -50,7 +50,7 @@ abstract class Conector implements ConectorGenerico
      */
     public function status()
     {
-        return ($this->conexao !== null) ? true : false;
+        return ($this->conexao !== null && $this->conexao !== false) ? true : false;
     }
 
     /**
