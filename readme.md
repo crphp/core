@@ -1,4 +1,4 @@
-# crphp/so
+# crphp/core
 No contexto deste documento, o termo "classe" refere-se a todas as classes, interfaces e traits.
 
 Está biblioteca representa um esqueleto inicial para se trabalhar com gerenciamento de hosts remotos. 
@@ -12,7 +12,7 @@ As palavras-chave "DEVE", "NÃO DEVE", "REQUER", "DEVERIA", "NÃO DEVERIA", "POD
 1. [Referências](#referencia)
 1. [Funcionalidades](#funcionalidades)
 1. [Requisitos (recomendados)](#requisitos)
-1. [Baixando o pacote crphp/wmi para o servidor](#wmi)
+1. [Baixando o pacote crphp/core para o servidor](#core)
 1. [Exemplos de uso](#exemplos)
 1. [Licença (MIT)](#licenca)
 
@@ -33,9 +33,10 @@ coleção de classes genéricas:
 - [x] Listar Serviços
 - [x] Stop / Start de serviço
 - [x] Listar processos
+- [x] Alterar prioridade do processo
 - [x] Matar / Finalizar processos
 - [x] Transformação de unidades
-- [x] Transformação de timestamp padrão Windows para data/hora
+- [x] Transformação de timestamp Windows para data/hora
 
 ## 3 - <a id="preparando-o-servidor"></a>Preparando o servidor
 > :exclamation: Os requisitos sugeridos logo abaixo representam as versões utilizadas em nosso ambiente 
@@ -50,7 +51,7 @@ Servidor
 Cliente
 - NÃO REQUER instalar nenhum componente
 
-## 4 - <a id="wmi"></a>Baixando o pacote crphp/so para o servidor
+## 4 - <a id="core"></a>Baixando o pacote crphp/core para o servidor
 
 Para a etapa abaixo estou pressupondo que você tenha o composer instalado e saiba utilizá-lo:
 ```
@@ -66,7 +67,10 @@ Caso ainda não tenha o composer instalado, obtenha este em: https://getcomposer
 
 ## 5 - <a id="exemplos"></a>Exemplos de uso
 
-Abaixo temos um exemplo de implementação. O código completo pode ser encontrado na biblioteca [crphp/wmi](https://github.com/crphp/wmi):
+Temos dois bons exemplos de bibliotecas que implementam este core, são respectivamente 
+[crphp/wmi](https://github.com/crphp/wmi) e [crphp/ssh](https://github.com/crphp/ssh).
+
+Veja um exemplo de implementação utilizado pela biblioteca [crphp/wmi](https://github.com/crphp/wmi):
 ```php
 use COM;
 use \Exception;
@@ -74,6 +78,32 @@ use \RuntimeException;
 use Crphp\Core\Sistema\Conector;
 
 class Wmi extends Conector
+{
+    public function conectar($host, $usuario = null, $senha = null, $porta = 135, $timeout = 10)
+    {
+        // Aqui você abre uma comunicação com o host remoto
+    }
+
+    public function executar($instrucao)
+    {
+        // Aqui você executa uma instrução remotamente
+    }
+
+    /*
+     * Os métodos status() e mensagemErro() possuem um comportamento genérico, provavelmente 
+     * você não irá precisar reescrevê-los
+     */
+}
+```
+
+Veja um exemplo de implementação utilizado pela biblioteca [crphp/ssh](https://github.com/crphp/ssh):
+```php
+use \Exception;
+use \RuntimeException;
+use phpseclib\Net\SSH2;
+use Crphp\Core\Sistema\Conector;
+
+class Ssh extends Conector
 {
     public function conectar($host, $usuario = null, $senha = null, $porta = 135, $timeout = 10)
     {
